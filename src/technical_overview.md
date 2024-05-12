@@ -27,7 +27,7 @@ The storage engines handles storage and retrieval of orderbook data. In centrali
 
 - Iteration: Orders are matched one-after the other in a price-time priority, necessitating iteration.
 
-Fairy has invented a novel storage engine called **Iterable Tick Map** that wraps around EVM's storage-trie for gas efficiency. Ethereum's slot storage is a merkle-patricia tree that allows key-value lookups, but no iterations. The key and value are both 256 bit in size.
+Goblin has invented a novel storage engine called **Iterable Tick Map** that wraps around EVM's storage-trie for gas efficiency. Ethereum's slot storage is a merkle-patricia tree that allows key-value lookups, but no iterations. The key and value are both 256 bit in size.
 
 ![](./assets/bitmap-list.drawio.svg)
 
@@ -46,9 +46,9 @@ A naive solution is to construct a red-black tree in memory to match orders. For
 
 2. The entire tree must be read with SLOADs. Write pattern for SSTOREs is unpredictable. This costs a lot of gas.
 
-Optimizations allow Fairy to better utilize the native key-value tree and large 256 bit numbers.
+Optimizations allow Goblin to better utilize the native key-value tree and large 256 bit numbers.
 
-1. Internally Fairy uses 64 bit instead of 256 bit numbers. This allows more data to be stored in the same slot.
+1. Internally Goblin uses 64 bit instead of 256 bit numbers. This allows more data to be stored in the same slot.
 
 2. The SSTORE tree is directly used for random access.
 
